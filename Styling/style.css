@@ -1,0 +1,48 @@
+
+/*Colors the header*/
+[data-testid="stHeader"] {
+    background-color: #1F1F24;
+}
+
+/*Colors the main bg*/
+[data-testid="stAppViewContainer"] {
+    background-color: #1F1F24;
+}
+
+/* [data-testid="stFooter"] did not work for this for some reason . . ., element was found through inspect element when running*/
+.st-emotion-cache-hzygls {
+    background-color: #1F1F24;
+}
+
+/*Colors the sidebar*/
+[data-testid="stSidebar"] {
+    background-color: #294A7B;
+    width: 600px;
+}
+
+
+[data-testid="stButton"] {
+    background-color: #5A739C;
+    color: #FFFDFE;
+    border-radius: 8px;
+    border: 2px solid #E7EFFF;
+    padding: 0.25em 1em;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    [data-testid="stMarkdownContainer"]{
+        background-color: #5A739C;
+        color: #FFFDFE;
+        border: none;
+        padding: none;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+
+    }
+}
+
+
+
