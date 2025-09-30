@@ -3,6 +3,8 @@ import ollama
 import config
 import uuid
 
+st.set_page_config(layout="wide")
+
 #function to load the css styling
 def load_css(file_path):
     with open(file_path) as f:

@@ -55,14 +55,37 @@ div.stButton > button:hover{
 
 /*|||||||||||||||||||||||||||||||||Sidebar Styling Section End|||||||||||||||||||||||||||||||||*/
 
+/*
 [data-testid="stChatInput"]{
     border-radius: 30px;
     border: 2px solid #E7EFFF;
     width: 800px;
+    justify-self: flex-center;
+    margin-right: auto;
+    margin-left: auto;  
+    outline: none;  
 }
+*/
+
+div.stChatInput{
+    border-radius: 30px;
+    border: 2px solid #E7EFFF;
+    width: 800px;
+    justify-self: flex-center;
+    margin-right: auto;
+    margin-left: auto;  
+    outline: none;  
+}
+
+div.stChatInput input:focus{
+    outline: none;  
+
+}
+
 
 .stChatMessage{
     background-color: #1F1F24;
+    max-width: 70%;
 }
 
 [class*="st-key-user"]{
