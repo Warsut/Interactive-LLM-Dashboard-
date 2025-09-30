@@ -18,7 +18,6 @@ def unique_message(name):
 
 MODEL = 'llama3.1:8b' #this is the model we are using
 
-st.title("Hi, I'm Bob!")
 
 st.sidebar.title("BOB A.I.")
 with st.sidebar:

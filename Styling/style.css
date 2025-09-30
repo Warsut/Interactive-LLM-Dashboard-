@@ -67,12 +67,18 @@ div.stButton > button:hover{
 
 [class*="st-key-user"]{
 
-    background-color: #294A7B;
-        border-radius: 15px;
-
     .stChatMessage{
         background-color: #294A7B;
         border-radius: 15px;
+        text-align: left;
+        flex-direction: row-reverse;
+
+        width: fit-content;
+        height: fit-content;
+        max-width: 70%;
+        position:relative;
+        justify-self: flex-end;
+        margin-left: auto;
     }
     
 }
