@@ -30,8 +30,8 @@ To run: in terminal do: streamlit run Bob.py
 
 
 ....Styling within config.toml.....
-in terminal: streamlit config show
-Then you can navigate to the streamlit config.toml file and open it. 
+in terminal: streamlit config show <-- not needed anymore (future reference note)
+Then you can navigate to the streamlit config.toml file and open it. (This is now in the streamlit folder that shows on the side)
 Make edits within there (be very careful)
 
 
