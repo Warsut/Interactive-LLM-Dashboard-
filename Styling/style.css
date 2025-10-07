@@ -1,38 +1,14 @@
-
-/*Colors the header*/
-[data-testid="stHeader"] {
-    background-color: #1F1F24;
-}
-
-/*Colors the main bg*/
-[data-testid="stAppViewContainer"] {
-    background-color: #1F1F24;
-}
-
-/* [data-testid="stFooter"] did not work for this for some reason . . ., element was found through inspect element when running*/
-.st-emotion-cache-hzygls {
-    background-color: #1F1F24;
-}
-
-
 /*|||||||||||||||||||||||||||||||||Sidebar Styling Section|||||||||||||||||||||||||||||||||*/
-/*Colors the sidebar*/
+/*Colors and adjusts the sidebar*/
 [data-testid="stSidebar"]{
     background-color: #294A7B;
-    width: 600px;
+    width: 350px !important;
 }
 
 /*Styling the header for the sidebar*/
 [data-testid="stSidebar"] h1 {
-        font-size: 40px; 
-    }
-
-/*Clear Button Bottom Positioning */
-.st-key-clear_chat_button button{
-    position: fixed;
-    bottom: 1%;    
+    font-size: 40px; 
 }
-
 
 /*Button Styling*/
 div.stButton > button{
@@ -44,52 +20,49 @@ div.stButton > button{
     font-size: 16px;
     font-weight: bold;
     cursor: pointer;
-    width: 200px;
+    width: 310px;
+    margin: 0 auto;
 }
 
 div.stButton > button:hover{
     background: #5A739C;
     border: 4px solid #E7EFFF;
+}
 
+
+.st-key-clear_chat_button button{
+    position:absolute;
+    top: 70vh;
+    width:100%;
+}
+
+
+.stFileUploader{
+    position:absolute;
+    top: 54vh;
+    width:100%;
 }
 
 /*|||||||||||||||||||||||||||||||||Sidebar Styling Section End|||||||||||||||||||||||||||||||||*/
 
-/*
-[data-testid="stChatInput"]{
+
+.st-key-chat_input_styled {
     border-radius: 30px;
     border: 2px solid #E7EFFF;
     width: 800px;
     justify-self: flex-center;
     margin-right: auto;
     margin-left: auto;  
-    outline: none;  
-}
-*/
-
-div.stChatInput{
-    border-radius: 30px;
-    border: 2px solid #E7EFFF;
-    width: 800px;
-    justify-self: flex-center;
-    margin-right: auto;
-    margin-left: auto;  
-    outline: none;  
 }
 
-div.stChatInput input:focus{
-    outline: none;  
-
-}
-
-
+/*Default message styling (Bob's styling for the most part)*/
 .stChatMessage{
     background-color: #1F1F24;
     max-width: 70%;
 }
 
+/*Message styling when from the user*/
 [class*="st-key-user"]{
-
     .stChatMessage{
         background-color: #294A7B;
         border-radius: 15px;
