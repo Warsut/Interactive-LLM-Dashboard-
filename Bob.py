@@ -62,22 +62,26 @@ with st.sidebar:
     #make a select box to view the previous chats
     chatHistorySelectBox = st.selectbox("View Chat History", st.session_state.chat_history)
 
-    files_uploaded = st.file_uploader("Pick a file") #allows user to upload a file ..... this doesn't work yet, you can submit a file, but nothing happens
+    files_uploaded = st.file_uploader("Pick a file") #allows user to upload a file
 
-    if files_uploaded is not None: #if there are files that have been uploaded
+    if files_uploaded is not None: #if there is a file that have been uploaded
 
-        if files_uploaded.type == 'text/plain':
-            #for file in files_uploaded: #for each file uploaded
+        if files_uploaded.type == 'text/plain': #if the file i sjust plain text
             file_contents = files_uploaded.read().decode("utf-8") #read and decode the file (put that in file data)
             st.session_state.messages.append({'role': 'system', 'content': f"A file has been uploaded named: {files_uploaded.name} The contents of the file is: {file_contents}"}) #tell the assistant what the file is, but do not print this out
-        elif files_uploaded.type == 'application/pdf':
+        elif files_uploaded.type == 'application/pdf': #if the file is a pdf
             file_contents = PdfReader(files_uploaded) #read and decode the file (put that in file data)
-            number_of_pages = len(file_contents.pages)
-            page = file_contents.pages[0]
-            file_text = page.extract_text()
-            st.session_state.messages.append({'role': 'system', 'content': f"A file has been uploaded named: {files_uploaded.name} The contents of the file is: {file_text}"}) #tell the assistant what the file is, but do not print this out
+            number_of_pages = len(file_contents.pages) #find the number of pages
+            #decode each page and print each page individually to the assistant
+            for i in range(number_of_pages): 
+                page = file_contents.pages[i] 
+                file_text = page.extract_text()
+                print(f"A file has been uploaded named: {files_uploaded.name} \n The contents of page {i+1} of the file is: {file_text} \n The file is {number_of_pages} pages long.")
+                st.session_state.messages.append({'role': 'system', 'content': f"A file has been uploaded named: {files_uploaded.name} \n The contents of page {i+1} the file is: {file_text} \n The file is {number_of_pages} pages long."}) #tell the assistant what the file is, but do not print this out
         else:
             print("There's an issue with finding the file type dawg")
+            st.session_state.messages.append({'role': 'system', 'content': "There's an issue with the file type dawg -  Coder dudes need to fix thisssss"}) #tell the assistant what the file is, but do not print this out
+
 
 
     st.button("-Clear Chat History", key="clear_chat_button", on_click=clear_chat_history) #button to clear chat history
