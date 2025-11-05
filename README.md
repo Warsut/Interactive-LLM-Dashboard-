@@ -1,4 +1,4 @@
-# Interactive Local LLM
+# Interactive Large Language Model (BOB)
 
 An **interactive Large Language Model** that runs **locally on your device** — no cloud inference needed.
 
@@ -27,8 +27,8 @@ This project is designed to give users privacy-first AI capabilities locally —
 ## 🛠️ Tech Stack
 
 - Python
-- Local LLM runtime (Ollama / GPT4All / llama.cpp / transformers)
-- Web UI (React or Python GUI depending on build)
+- Local LLM runtime (Ollama)
+- Web UI (Python GUI)
 - File parsing utilities
 
 *(specifics will be defined once architecture is locked in)*
@@ -38,7 +38,7 @@ This project is designed to give users privacy-first AI capabilities locally —
 ## 📦 Installation
 
 ```bash
-git clone https://github.com/YOUR_REPO_HERE.git
-cd YOUR_REPO_HERE
+git clone https://github.com/Interactive-LLM-Dashboard-.git
+cd Interactive-LLM-Dashboard
 pip install -r requirements.txt
-python app.py
+python bob.py
