@@ -37,9 +37,6 @@ if 'CHATS' not in st.session_state:
     st.session_state.current_chat = 0
     st.session_state.selected_chat = 0
 
-st.write(st.session_state.selected_chat)
-st.write(st.session_state.current_chat)
-
 # --- Chat Management Functions---
 
 #create our clear all chats function
@@ -122,7 +119,6 @@ with st.sidebar:
     #update select box variable
     #find the index of the selected chat name
     st.session_state.selected_chat = st.session_state['CHAT_NAMES'].index(chatHistorySelectBox)
-    st.write(st.session_state.selected_chat)
 
     #switch chats if needed
     if(st.session_state.current_chat != st.session_state.selected_chat):
