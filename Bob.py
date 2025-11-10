@@ -69,15 +69,17 @@ def new_chat():
     st.session_state.selected_chat = new_chat_index
     st.session_state.messages = st.session_state['CHATS'][new_chat_index]
 
-
 #create our chat switching function
 def chat_switch(target_chat):
     #save the history of the chat we are leaving
     st.session_state['CHATS'][st.session_state.current_chat] = st.session_state.messages
     
+    #update current_chat index to new chat index
+    st.session_state.current_chat = target_chat
+    st.session_state.selected_chat = target_chat
+
     #load the history of the chat we are switching to
     st.session_state.messages = st.session_state['CHATS'][target_chat]
-    st.session_state.current_chat = target_chat
 
 #initializes the messages for the current view
 if 'messages' not in st.session_state:
@@ -88,7 +90,7 @@ if 'messages' not in st.session_state:
 
 #for all the messages we have in the session state --> display the message content
 for message in st.session_state["messages"]:
-    # Check if the message is a dictionary (FIXES TypeError: string indices must be integers)
+    #Check if the message is a dictionary
     if isinstance(message, dict) and message["role"] != "system":
         #if role is user display user avatar and put in container
         if(message["role"] == "user"):
@@ -110,9 +112,11 @@ with st.sidebar:
 
     #the list holding the chat names is CHAT_NAMES, but this uses a local reference
     chatHistorySelectBox = st.selectbox(
-        "View Chat History", 
-        st.session_state['CHAT_NAMES'], 
-        index=st.session_state.selected_chat
+    "View Chat History",
+    st.session_state['CHAT_NAMES'],
+    index = st.session_state.selected_chat,
+    key='chat_history_selector',
+    on_change = lambda: chat_switch(st.session_state['CHAT_NAMES'].index(st.session_state.chat_history_selector))
     )
 
     #update select box variable
