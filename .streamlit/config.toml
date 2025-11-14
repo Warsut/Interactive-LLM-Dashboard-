@@ -138,7 +138,10 @@ developmentMode = false
 
 
 [server]
-port = 8502
+port = 8501
+headless = false
+enableCORS = true
+enableXsrfProtection = true
 
 # List of directories to watch for changes.
 # 
@@ -310,6 +313,8 @@ port = 8502
 
 
 [browser]
+serverAddress = "localhost"
+serverPort = 8501
 
 # Internet address where users should point their browsers in order to
 # connect to the app. Can be IP address or DNS name and path.
