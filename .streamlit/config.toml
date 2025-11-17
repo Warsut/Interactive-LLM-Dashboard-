@@ -4,6 +4,7 @@
  
 
 [global]
+developmentMode = false
 
 # By default, Streamlit displays a warning when a user sets both a widget
 # default value in the function defining the widget and a widget value via
@@ -137,6 +138,10 @@
 
 
 [server]
+port = 8501
+headless = false
+enableCORS = true
+enableXsrfProtection = true
 
 # List of directories to watch for changes.
 # 
@@ -308,6 +313,8 @@
 
 
 [browser]
+serverAddress = "localhost"
+serverPort = 8501
 
 # Internet address where users should point their browsers in order to
 # connect to the app. Can be IP address or DNS name and path.

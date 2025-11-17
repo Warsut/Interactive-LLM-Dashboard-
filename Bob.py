@@ -1,9 +1,16 @@
+import os
+os.environ["STREAMLIT_DEVELOPMENT_MODE"] = "false"
+os.environ["STREAMLIT_DEV_MODE"] = "0"
+os.environ["STREAMLIT_WATCHER_TYPE"] = "none"
+os.environ["STREAMLIT_SERVER_PORT"] = "8501"
+os.environ["STREAMLIT_GLOBAL_DEVELOPMENT_MODE"] = "false"
 import streamlit as st
 import ollama
 import config
 import uuid
 from collections import namedtuple
 from pypdf import PdfReader
+import sys
 
 if __name__ == "__main__":
     st.set_page_config(layout="wide")
@@ -14,13 +21,20 @@ if __name__ == "__main__":
         {'role': 'assistant', 'content': 'Hello! I am Bob. Please let me know how I can best assist you today.'}
     ]
 
+    #function to find the path
+    def find_path(x_path):
+        #"""Works in dev and PyInstaller EXE"""
+        if hasattr(sys, "_MEIPASS"):
+            return os.path.join(sys._MEIPASS, x_path)
+        return os.path.join(os.path.abspath("."), x_path)
+
     #function to load the css styling
     def load_css(file_path):
-        with open(file_path) as f:
+        with open(find_path(file_path)) as f:
             st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
     #call the function to load the styling
-    load_css("Styling/style.css") 
+    load_css("Styling/bobStyle.css") 
 
     #creates a unique key for each chat message (made this for styling)
     def unique_message(name):
@@ -85,6 +99,10 @@ if __name__ == "__main__":
 
     # --- Message Display Loop ---
 
+    #set the avatars for the user and assistant (this is important for making the exe)
+    user_avatar = find_path("Assets/User_Icon.png")
+    assistant_avatar = find_path("Assets/smiley.jpg")
+
     #for all the messages we have in the session state --> display the message content
     for message in st.session_state["messages"]:
         #Check if the message is a dictionary
@@ -92,12 +110,12 @@ if __name__ == "__main__":
             #if role is user display user avatar and put in container
             if(message["role"] == "user"):
                 with unique_message("user"):
-                    with st.chat_message("user", avatar="Assets/User_Icon.png"):
+                    with st.chat_message("user", avatar=user_avatar):
                         st.markdown(message["content"])
         
             else:
             #if role is assistant display assistant avatar
-                with st.chat_message("assistant", avatar="Assets/smiley.jpg"):
+                with st.chat_message("assistant", avatar=assistant_avatar):
                     st.markdown(message["content"])
 
 
@@ -202,11 +220,11 @@ if __name__ == "__main__":
         
         #display the user prompt
         with unique_message("user"):
-            with st.chat_message("user", avatar="Assets/User_Icon.png"):
+            with st.chat_message("user", avatar=user_avatar):
                 st.markdown(prompt) 
         
         #generate and display the assistant response
-        with st.chat_message("assistant", avatar="Assets/smiley.jpg"):
+        with st.chat_message("assistant", avatar=assistant_avatar):
             stream = generate_response()
             response = st.write_stream(stream) #write the stream response
             st.session_state.messages.append({'role': 'assistant', 'content': response}) #append assitant response into content
