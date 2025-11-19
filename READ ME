@@ -24,6 +24,12 @@ Make sure you have pypdf installed.
 To do this:
     --> pip install pypdf
     --> pip3 install pypdf (if regular pip is not working)
+
+Also make sure you have Pandas and the docx reader installed.
+To do this:
+    --> pip install Pandas
+    --> pip install tabulate
+    --> pip install python-docx
 -------------------------------
 ....Other Notes....
 

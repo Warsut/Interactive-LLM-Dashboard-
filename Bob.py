@@ -190,7 +190,38 @@ if __name__ == "__main__":
                             )
                         }
                     ) #tell the assistant what the file is, but do not print this out
-            
+
+            elif files_uploaded.type == 'text/csv': #if it's a csv file
+                import pandas as pd #requires pip install pandas, and pip install tabulate
+                df = pd.read_csv(files_uploaded)
+                file_contents = df.to_markdown(index = False)
+
+                #system message for LLM
+                st.session_state.messages.append(
+                    {
+                        'role' : 'system',
+                        'content' : f"A file has been uploaded named: {files_uploaded.name} \n"
+                                    f"The contents of the CSV  file are: \n {file_contents}"
+                    }
+                )
+
+            elif files_uploaded.type == 'application/vnd.openxmlformats-officedocument.wordprocessingml.document': #if it's a .docx file
+                from docx import Document #required pip install python-docx
+
+                document = Document(files_uploaded)
+                file_contents = ""
+                for paragraph in document.paragraphs:
+                    file_contents += paragraph.text + "\n"
+
+                #system message for LLM
+                st.session_state.messages.append(
+                    {
+                        'role': 'system',
+                        'content': f"A file has been uploaded named: {files_uploaded.name} \n"
+                                    f"The contents of the Word document are: \n{file_contents}"
+                    }
+                )
+
             else:
                 print("There's an issue with finding the file type dawg")
                 st.session_state.messages.append(
