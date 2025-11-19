@@ -4,13 +4,17 @@ os.environ["STREAMLIT_DEV_MODE"] = "0"
 os.environ["STREAMLIT_WATCHER_TYPE"] = "none"
 os.environ["STREAMLIT_SERVER_PORT"] = "8501"
 os.environ["STREAMLIT_GLOBAL_DEVELOPMENT_MODE"] = "false"
-import streamlit as st
-import ollama
-import config
-import uuid
-from collections import namedtuple
-from pypdf import PdfReader
 import sys
+import config 
+import uuid 
+import streamlit as st #in venv --> pip install streamlit
+import ollama #in venv --> pip install ollama
+from pypdf import PdfReader #in venv --> pip install pypdf
+import pandas as pd #in venv --> pip install pandas, pip install tabulate
+from docx import Document #in venv --> pip install python-docx
+
+
+#also note, for installations you should also be able to do pip install -r requirements.txt (all of the requirements should be in there)
 
 if __name__ == "__main__":
     st.set_page_config(layout="wide")
@@ -21,16 +25,15 @@ if __name__ == "__main__":
         {'role': 'assistant', 'content': 'Hello! I am Bob. Please let me know how I can best assist you today.'}
     ]
 
-    #function to find the path
-    def find_path(x_path):
-        #"""Works in dev and PyInstaller EXE"""
+    #function to find the path of the file that it is given (note: MEIPASS is the temporary folder pyinstaller makes, which is why we need this)
+    def find_path(file_path):
         if hasattr(sys, "_MEIPASS"):
-            return os.path.join(sys._MEIPASS, x_path)
-        return os.path.join(os.path.abspath("."), x_path)
+            return os.path.join(sys._MEIPASS, file_path) #return the pyinstaller path
+        return os.path.join(os.path.abspath("."), file_path) #return the current directory path plus the given file path
 
-    #function to load the css styling
-    def load_css(file_path):
-        with open(find_path(file_path)) as f:
+    #function to load the css styling, takes the file path for the css, finds it, loads it/shows it
+    def load_css(css_path):
+        with open(find_path(css_path)) as f:
             st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
     #call the function to load the styling
@@ -40,7 +43,7 @@ if __name__ == "__main__":
     def unique_message(name):
         return st.container(key=f"{name}-{uuid.uuid4()}")
 
-    MODEL = 'llava:7b' #this is the model we are using
+    MODEL = 'llava:7b' #this is the model we are using,  if you don't already have this on your computer in terminal do: ollama run llava:7b
 
     # --- Session State Initialization---
 
@@ -125,6 +128,7 @@ if __name__ == "__main__":
     with st.sidebar:
         st.button("+New Chat", key="new_chat_button", on_click=new_chat) #button to start a new chat
 
+        #selectbox/dropdown/accordion
         #the list holding the chat names is CHAT_NAMES, but this uses a local reference
         chatHistorySelectBox = st.selectbox(
             "View Chat History",
@@ -192,7 +196,6 @@ if __name__ == "__main__":
                     ) #tell the assistant what the file is, but do not print this out
 
             elif files_uploaded.type == 'text/csv': #if it's a csv file
-                import pandas as pd #requires pip install pandas, and pip install tabulate
                 df = pd.read_csv(files_uploaded)
                 file_contents = df.to_markdown(index = False)
 
@@ -206,7 +209,6 @@ if __name__ == "__main__":
                 )
 
             elif files_uploaded.type == 'application/vnd.openxmlformats-officedocument.wordprocessingml.document': #if it's a .docx file
-                from docx import Document #required pip install python-docx
 
                 document = Document(files_uploaded)
                 file_contents = ""
@@ -226,8 +228,8 @@ if __name__ == "__main__":
                 print("There's an issue with finding the file type dawg")
                 st.session_state.messages.append(
                     {
-                        'role': 'system',
-                        'content': "There's an issue with the file type dawg -  Coder dudes need to fix thisssss"
+                        'role': 'assistant',
+                        'content': "There's an issue trying to read this type of file. Please let devlopers know so that I can be improved to support this need."
                     }
                 ) #tell the assistant what the file is, but do not print this out
 
