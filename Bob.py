@@ -166,6 +166,8 @@ if __name__ == "__main__":
 
         if files_uploaded is not None: #if there is a file that have been uploaded
 
+            print(f"A file has been uploaded. Name: '{files_uploaded.name}', Type: '{files_uploaded.type}'") #this is a test to print to the console. delete later
+
             if files_uploaded.type == 'text/plain': #if the file i sjust plain text
                 file_contents = files_uploaded.read().decode("utf-8") #read and decode the file (put that in file data)
                 st.session_state.messages.append(
