@@ -21,7 +21,8 @@ streamlit_data += [
     ("venv/lib/python3.9/site-packages/streamlit/static", "./streamlit/static"),
     ("venv/lib/python3.9/site-packages/streamlit/runtime", "./streamlit/runtime"),
     ("Bob.py", "."),
-    ("Styling/bobStyle.css", "Styling")
+    ("Styling/bobStyle.css", "Styling"),
+    (".streamlit/config.toml", ".streamlit")
 ]
 
 
